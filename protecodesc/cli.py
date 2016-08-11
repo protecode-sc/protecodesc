@@ -79,22 +79,22 @@ def groups(appcheck):
         click.echo('{id:<8d} {name}'.format(**g))
 
 
-@cli.add_command
-@click.option('--group', help="Show applications in GROUP", metavar="GROUP")
-@click.command()
-@use_appcheck
-def list(appcheck, group):
-    """List apps"""
-    apps = appcheck.list_apps(group=group)
-
-    app_format = u"{id:5s}  {name}"
-    if len(apps['products']) > 0:
-        click.echo(app_format.format(id="ID", name="Application name"))
-        for p in apps['products']:
-            click.echo(app_format.format(id=str(p['id']),
-                                         name=p['name']))
-    else:
-        click.echo("No apps found.")
+# @cli.add_command
+# @click.option('--group', help="Show applications in GROUP", metavar="GROUP")
+# @click.command()
+# @use_appcheck
+# def list(appcheck, group):
+#     """List apps"""
+#     apps = appcheck.list_apps(group=group)
+#
+#     app_format = u"{id:5s}  {name}"
+#     if len(apps['products']) > 0:
+#         click.echo(app_format.format(id="ID", name="Application name"))
+#         for p in apps['products']:
+#             click.echo(app_format.format(id=str(p['id']),
+#                                          name=p['name']))
+#     else:
+#         click.echo("No apps found.")
 
 @cli.add_command
 @click.argument('default_group', 'Set default group')
