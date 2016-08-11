@@ -256,12 +256,13 @@ def scan(appcheck, file, group, background):
             # Regular file, upload as is
             res = appcheck.upload_file(f, group=group)
 
-        if res['results']['status'] == ProtecodeSC.STATUS_READY:
+        res = res.get('results', res)
+        if res.get('status') == ProtecodeSC.STATUS_READY:
             status = 'READY; scanned before'
         else:
             status = 'queued for scanning'
-        report_url = res['results']['report_url']
-        sha1_checksum = res['results']['sha1sum']
+        report_url = res.get('report_url')
+        sha1_checksum = res.get('sha1sum')
         upload_shasums.append(sha1_checksum)
         click.echo(" - SHA1: {sha1}".format(sha1=sha1_checksum))
         click.echo(" - {url} ({status})".format(url=report_url,

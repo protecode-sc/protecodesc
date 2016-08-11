@@ -104,7 +104,7 @@ class ProtecodeSC(object):
         uri = self._uri('upload', filename=display_name)
         headers = {}
         if group:
-            headers['Group'] = group
+            headers['Group'] = str(group)  # requests assumes values as string
 
         def _upload_file():
             """Upload file, implementation"""
